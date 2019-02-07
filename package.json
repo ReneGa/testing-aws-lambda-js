@@ -1,0 +1,18 @@
+{
+  "name": "testing-aws-lambdas-js",
+  "version": "1.0.0",
+  "description": "Example project to showcase testing AWS Lambda functions written in JavaScript",
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  },
+  "author": "René Galle",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.2"
+  },
+  "dependencies": {
+    "dynamodb-doc": "^1.0.0"
+  }
+}
