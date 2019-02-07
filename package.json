@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Example project to showcase testing AWS Lambda functions written in JavaScript",
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "mocha"
   },
   "author": "René Galle",
   "license": "ISC",
