@@ -3,22 +3,19 @@ const sinon = require('sinon');
 const doc = require('dynamodb-doc');
 
 const deps = {
-  // Use actual dynamo client, to have all its methods fake-able by Sinon.JS
-  dynamo: new doc.DynamoDB(),
+  // Use sinon.stub(..) to prevent any calls to DynamoDB and enable faking of methods
+  dynamo: sinon.stub(new doc.DynamoDB())
 };
+
 const myHandler = require('../handler')(deps);
+
+// (Optional) keep test output free of error messages printed by our lambda function
+sinon.stub(console, 'error');
 
 describe('handler', () => {
 
-  beforeEach(() => {
-    // Use sinon.stub(..) to prevent any calls to actual dependencies and enable faking of methods
-    Object.values(deps).forEach(dep => sinon.stub(dep));
-    // (Optional) keep test output free of error messages printed by our lambda function
-    sinon.stub(console, 'error');
-  });
-
   // Reset test doubles behavior for isolating individual test cases
-  afterEach(() => sinon.restore());
+  afterEach(() => sinon.reset());
 
   it('should call dynamo db scan(...) in case of HTTP GET and return the result', async () => {
     const event = {
