@@ -3,17 +3,18 @@ const sinon = require('sinon');
 const doc = require('dynamodb-doc');
 
 const deps = {
-  // Use sinon.stub(..) to prevent any calls to DynamoDB and enable faking of methods
+  // Use sinon.stub(..) to prevent any calls to DynamoDB and
+  // enable faking of methods
   dynamo: sinon.stub(new doc.DynamoDB())
 };
 
 const myHandler = require('../handler')(deps);
 
-// (Optional) keep test output free of error messages printed by our lambda function
+// (Optional) Keep test output free of
+// error messages printed by our lambda function
 sinon.stub(console, 'error');
 
 describe('handler', () => {
-
   // Reset test doubles behavior for isolating individual test cases
   afterEach(() => sinon.reset());
 
