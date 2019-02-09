@@ -5,7 +5,7 @@ const doc = require('dynamodb-doc');
 const deps = {
   // Use sinon.stub(..) to prevent any calls to DynamoDB and
   // enable faking of methods
-  dynamo: sinon.stub(new doc.DynamoDB())
+  dynamo: sinon.stub(new doc.DynamoDB()),
 };
 
 const myHandler = require('../handler')(deps);
@@ -15,8 +15,8 @@ const myHandler = require('../handler')(deps);
 sinon.stub(console, 'error');
 
 describe('handler', () => {
-  // Reset test doubles behavior for isolating individual test cases
-  afterEach(() => sinon.reset());
+  // Reset test doubles for isolating individual test cases
+  afterEach(sinon.reset);
 
   it('should call dynamo db scan(...) in case of HTTP GET and return the result', async () => {
     const event = {
