@@ -59,10 +59,14 @@ describe('handler', () => {
       queryStringParameters: {},
       body: '{}',
     };
+    deps.dynamo.putItem.returns({ promise: sinon.fake.resolves('success') });
 
-    await myHandler(event);
+    const { headers, statusCode, body } = await myHandler(event);
 
     sinon.assert.calledWith(deps.dynamo.putItem, {});
+    expect(headers['Content-Type']).to.equal('application/json');
+    expect(statusCode).to.equal('204');
+    expect(JSON.parse(body)).to.equal('success');
   });
 
   it('should reject unsupported HTTP methods', async () => {
